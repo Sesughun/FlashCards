@@ -42,6 +42,9 @@ export default function Header() {
             ref={amountEl}
           />
         </div>
+        <div className="form-group">
+          <button className="btn">Generate</button>
+        </div>
       </form>
     </div>
   );
