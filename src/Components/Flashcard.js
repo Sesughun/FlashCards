@@ -1,4 +1,3 @@
-import userEvent from "@testing-library/user-event";
 import React, { useState, useEffect, useRef } from "react";
 
 export default function Flashcard({ flashcard }) {
@@ -30,7 +29,9 @@ export default function Flashcard({ flashcard }) {
         {flashcard.question}
         <div className="flashcard-options">
           {flashcard.options.map((option) => (
-            <div className="flashcard-option">{option}</div>
+            <div className="flashcard-option" key={option}>
+              {option}
+            </div>
           ))}
         </div>
       </div>

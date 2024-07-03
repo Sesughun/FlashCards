@@ -2,9 +2,10 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import FlashcardList from "./Components/FlashcardList";
 import axios from "axios";
+import Header from "./Components/Header";
 
 function App() {
-  const [flashcards, setFlashcards] = useState(sample);
+  const [flashcards, setFlashcards] = useState([]);
   useEffect(() => {
     axios.get("https://opentdb.com/api.php?amount=10").then((res) => {
       setFlashcards(
@@ -33,6 +34,7 @@ function App() {
   }
   return (
     <div className="container">
+      <Header></Header>
       <FlashcardList flashcards={flashcards} />
     </div>
   );
