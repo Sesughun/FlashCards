@@ -1,40 +1,17 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
 import FlashcardList from "./Components/FlashcardList";
-import axios from "axios";
 import Header from "./Components/Header";
+import FlashcardContext from "./FlashcardContext";
 
 function App() {
   const [flashcards, setFlashcards] = useState([]);
-  useEffect(() => {
-    axios.get("https://opentdb.com/api.php?amount=10").then((res) => {
-      setFlashcards(
-        res.data.results.map((questionItem, index) => {
-          const answer = decodeString(questionItem.correct_answer);
-          const options = [
-            ...questionItem.incorrect_answers.map((a) => decodeString(a)),
-            answer,
-          ];
-          return {
-            id: `${index}-${Date.now()}`,
-            question: decodeString(questionItem.question),
-            answer: questionItem.correct_answer,
-            options: options.sort(() => Math.random() - 0.5),
-          };
-        })
-      );
-      console.log(res.data);
-    });
-  }, []);
 
-  function decodeString(str) {
-    const textArea = document.createElement("textarea");
-    textArea.innerHTML = str;
-    return textArea.value;
-  }
   return (
     <div className="container">
-      <Header></Header>
+      <FlashcardContext.Provider value={{ setFlashcards }}>
+        <Header></Header>
+      </FlashcardContext.Provider>
       <FlashcardList flashcards={flashcards} />
     </div>
   );

@@ -29,9 +29,11 @@ export default function Flashcard({ flashcard }) {
         {flashcard.question}
         <div className="flashcard-options">
           {flashcard.options.map((option) => (
-            <div className="flashcard-option" key={option}>
-              {option}
-            </div>
+            <ul>
+              <li className="flashcard-option" key={option}>
+                {option}
+              </li>
+            </ul>
           ))}
         </div>
       </div>
